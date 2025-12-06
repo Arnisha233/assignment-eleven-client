@@ -2,36 +2,83 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { imageUpload } from "../../utils";
 import useAuth from "../../hooks/useAuth";
+import axios from "axios";
+import { useMutation } from "@tanstack/react-query";
+import LoadingSpinner from "../Shared/LoadingSpinner";
+import ErrorPage from "../../pages/ErrorPage";
+import toast from "react-hot-toast";
 const AddProduct = () => {
   const { user } = useAuth();
+  // use mutation hook usecase
+  const {
+    isPending,
+    isError,
+    mutateAsync,
+    reset: mutationReset,
+  } = useMutation({
+    mutationFn: async (payload) =>
+      await axios.post(`${import.meta.env.VITE_API_URL}/add-product`, payload),
+    onSuccess: (data) => {
+      console.log(data);
+      // show toast
+      toast.success("product added sucessfuly");
+      mutationReset();
+      // query key invalids
+    },
+    onError: (error) => {
+      console.log(error);
+    },
+    onMutate: (payload) => {
+      console.log("i will post this data", payload);
+    },
+    onSettled: (data, error) => {
+      if (data) console.log(data);
+      if (error) console.log(error);
+    },
+    retry: 3,
+  });
   // react hook form
   const {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm();
   const onsubmit = async (data) => {
     const { name, description, category, quantity, price, image, moq, video } =
       data;
     const imageFile = image[0];
-    const imageUrl = await imageUpload(imageFile);
-    const plantData = {
-      image: imageUrl,
-      name,
-      description,
-      category,
-      quantity: Number(quantity),
-      price: Number(price),
-      moq: Number(moq),
-      video,
-      seller: {
-        image: user?.photoURL,
-        name: user?.displayName,
-        email: user?.email,
-      },
-    };
-    console.log(plantData);
+
+    try {
+      const imageUrl = await imageUpload(imageFile);
+      const plantData = {
+        image: imageUrl,
+        name,
+        description,
+        category,
+        quantity: Number(quantity),
+        price: Number(price),
+        moq: Number(moq),
+        video,
+        seller: {
+          image: user?.photoURL,
+          name: user?.displayName,
+          email: user?.email,
+        },
+      };
+      await mutateAsync(plantData);
+      reset();
+      // const { data } = await axios.post(
+      //   `${import.meta.env.VITE_API_URL}/add-product`,
+      //   plantData
+      // );
+      // console.log(data);
+    } catch (err) {
+      console.log(err);
+    }
   };
+  if (isPending) return <LoadingSpinner />;
+  if (isError) return <ErrorPage />;
   return (
     <div>
       <div className="w-full min-h-[calc(100vh-40px)] flex flex-col justify-center items-center text-gray-800 rounded-xl bg-gray-50">

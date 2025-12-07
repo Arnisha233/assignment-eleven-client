@@ -79,7 +79,7 @@ const NavBar = () => {
                 <MyLink to="/">Home</MyLink>
               </li>
               <li>
-                <MyLink to="/">All-Product</MyLink>
+                <MyLink to="/all-product">All-Product</MyLink>
               </li>
               {!user && (
                 <>

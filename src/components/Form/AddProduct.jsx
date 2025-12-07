@@ -1,4 +1,3 @@
-import React from "react";
 import { useForm } from "react-hook-form";
 import { imageUpload } from "../../utils";
 import useAuth from "../../hooks/useAuth";
@@ -44,9 +43,28 @@ const AddProduct = () => {
     formState: { errors },
     reset,
   } = useForm();
+  // for image start
+  // const [previewImages, setPreviewImages] = useState([]);
+
+  // // Handle image preview
+  // const handleImageChange = (e) => {
+  //   const files = Array.from(e.target.files);
+  //   const previews = files.map((file) => URL.createObjectURL(file));
+  //   setPreviewImages(previews);
+  // };
+  // for image end
   const onsubmit = async (data) => {
-    const { name, description, category, quantity, price, image, moq, video } =
-      data;
+    const {
+      name,
+      description,
+      category,
+      quantity,
+      price,
+      image,
+      moq,
+      video,
+      payment,
+    } = data;
     const imageFile = image[0];
 
     try {
@@ -60,6 +78,7 @@ const AddProduct = () => {
         price: Number(price),
         moq: Number(moq),
         video,
+        payment,
         seller: {
           image: user?.photoURL,
           name: user?.displayName,
@@ -148,7 +167,7 @@ const AddProduct = () => {
               </div>
 
               {/* Payment Options */}
-              {/* <div className="space-y-1 text-sm">
+              <div className="space-y-1 text-sm">
                 <label htmlFor="payment" className="block text-gray-600">
                   Payment Options
                 </label>
@@ -167,7 +186,7 @@ const AddProduct = () => {
                     {errors.payment.message}
                   </p>
                 )}
-              </div> */}
+              </div>
             </div>
 
             {/* SECOND COLUMN */}

@@ -7,6 +7,8 @@ import Login from "../pages/Login/Login";
 import DashboardLayout from "../layouts/DashboardLayout";
 import PrivateRoute from "./PrivateRoute";
 import AddProduct from "../components/Form/AddProduct";
+import AllProduct from "../pages/AllProduct/AllProduct";
+import ProductDetails from "../pages/ProductDetails/ProductDetails";
 
 export const router = createBrowserRouter([
   {
@@ -17,6 +19,18 @@ export const router = createBrowserRouter([
       {
         path: "/",
         element: <Home />,
+      },
+      {
+        path: "/all-product",
+        element: <AllProduct />,
+      },
+      {
+        path: "/product-details/:id",
+        element: (
+          <PrivateRoute>
+            <ProductDetails />
+          </PrivateRoute>
+        ),
       },
       {
         path: "/login",

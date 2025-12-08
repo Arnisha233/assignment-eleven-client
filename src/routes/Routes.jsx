@@ -9,6 +9,9 @@ import PrivateRoute from "./PrivateRoute";
 import AddProduct from "../components/Form/AddProduct";
 import AllProduct from "../pages/AllProduct/AllProduct";
 import ProductDetails from "../pages/ProductDetails/ProductDetails";
+import PaymentSucess from "../pages/Payment/PaymentSucess";
+import MyOrders from "../pages/Dashboard/Customer/MyOrders";
+import Profile from "../pages/Dashboard/Customer/Common/Profile";
 
 export const router = createBrowserRouter([
   {
@@ -33,6 +36,10 @@ export const router = createBrowserRouter([
         ),
       },
       {
+        path: "/payment-success",
+        element: <PaymentSucess />,
+      },
+      {
         path: "/login",
         element: <Login />,
       },
@@ -55,6 +62,22 @@ export const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <AddProduct />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "profile",
+        element: (
+          <PrivateRoute>
+            <Profile />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "my-orders",
+        element: (
+          <PrivateRoute>
+            <MyOrders />
           </PrivateRoute>
         ),
       },

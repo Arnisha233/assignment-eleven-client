@@ -4,8 +4,13 @@ import React from "react";
 import { useParams } from "react-router";
 import Container from "../../components/Shared/Container";
 import LoadingSpinner from "../../components/Shared/LoadingSpinner";
+import { useState } from "react";
+import PurchaseModal from "../../components/Modal/PurchaseModal";
+import Button from "../../components/Button/Button";
+import toast from "react-hot-toast";
 
 const ProductDetails = () => {
+  let [isOpen, setIsOpen] = useState(false);
   const { id } = useParams();
   console.log(id);
   const {
@@ -21,6 +26,9 @@ const ProductDetails = () => {
       return result.data;
     },
   });
+  const closeModal = () => {
+    setIsOpen(false);
+  };
   if (isLoading) return <LoadingSpinner />;
   const {
     image,
@@ -34,6 +42,7 @@ const ProductDetails = () => {
     seller,
   } = product;
   console.log(payment);
+
   return (
     <Container>
       <div>
@@ -74,21 +83,16 @@ const ProductDetails = () => {
             {/* Product Title & Category */}
             <h1 className="text-3xl font-bold text-gray-800">{name}</h1>
             <p className="text-gray-500 mt-2">Category: {category}</p>
-
             <hr className="my-6" />
-
             {/* Description */}
             <p className="text-lg font-light text-neutral-500">{description}</p>
-
             <hr className="my-6" />
-
             {/* Stock info */}
             <div className="space-y-2 text-neutral-600">
               <p>Available Quantity: {quantity} Units</p>
               <p>Minimum Order Quantity: {moq} Units</p>
               <p>Payment Options {payment}</p>
             </div>
-
             <hr className="my-6" />
             <div
               className="
@@ -116,16 +120,12 @@ const ProductDetails = () => {
             <p className="font-medium text-gray-700">Payment Options:</p>
             <p className="text-gray-500">{paymentOption}</p>
           </div> */}
-
             <hr className="my-6" />
-
             {/* Price */}
             <h2 className="font-bold text-3xl text-gray-700">
               Price: ${price}
             </h2>
-
             <hr className="my-6" />
-
             {/* Order / Booking Button (Role Based) */}
             {/* {user && user.role !== "admin" && user.role !== "manager" ? (
       <button
@@ -139,9 +139,42 @@ const ProductDetails = () => {
         Login as customer to place order
       </p>
     )} */}
-            <button className="w-full py-3 bg-lime-500 hover:bg-lime-600 text-white font-medium rounded-lg transition">
+
+            <div className="flex justify-between">
+              <div>
+                <Button
+                  onClick={() => {
+                    if (payment === "Cash on Delivery") {
+                      toast.success("Order completed");
+                    } else {
+                      setIsOpen(true);
+                    }
+                  }}
+                  label="Purchase"
+                />
+              </div>
+            </div>
+
+            <PurchaseModal
+              product={product}
+              closeModal={closeModal}
+              isOpen={isOpen}
+            />
+
+            {/* <div className="flex justify-between">
+              <div>
+                <Button onClick={() => setIsOpen(true)} label="Purchase" />
+              </div>
+            </div>
+
+            <PurchaseModal
+              product={product}
+              closeModal={closeModal}
+              isOpen={isOpen}
+            /> */}
+            {/* <button className="w-full py-3 bg-lime-500 hover:bg-lime-600 text-white font-medium rounded-lg transition">
               Order / Book Now
-            </button>
+            </button> */}
           </div>
         </div>
       </div>

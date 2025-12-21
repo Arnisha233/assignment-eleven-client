@@ -52,12 +52,12 @@ const Footer = () => {
           <aside>
             <p>
               Copyright © {new Date().getFullYear()} - All right reserved by
-              ACME Industries Ltd
+              Garments Industries Ltd
             </p>
           </aside>
         </footer>
         <div className="py-6 text-sm text-center text-gray-400">
-          © 2025-2026 PlantNet Inc. All rights reserved.
+          © 2025-2026 Garments Inc. All rights reserved.
         </div>
       </footer>
     </div>

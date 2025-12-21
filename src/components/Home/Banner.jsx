@@ -8,7 +8,6 @@ const Banner = () => {
     <div>
       <div
         className="w-full h-96 bg-cover bg-center"
-        // style={{ backgroundImage: `url(${banner})` }}
         style={{
           backgroundImage: `linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url(${banner})`,
         }}

@@ -302,7 +302,7 @@ const AddProduct = () => {
                       {errors.image.message}
                     </p>
                   )}
-                  <div className="bg-lime-500 text-white border border-gray-300 rounded font-semibold cursor-pointer p-1 px-3 hover:bg-lime-500">
+                  <div className="btn btn-primary text-white border border-gray-300 rounded font-semibold cursor-pointer p-1 px-3 hover:bg-lime-500">
                     Upload
                   </div>
                 </label>
@@ -325,7 +325,7 @@ const AddProduct = () => {
               {/* Submit Button */}
               <button
                 type="submit"
-                className="w-full cursor-pointer p-3 mt-5 text-center font-medium text-white rounded shadow-md bg-lime-500"
+                className="w-full cursor-pointer p-3 mt-5 text-center font-medium text-white rounded shadow-md btn btn-primary"
               >
                 Save Product
               </button>

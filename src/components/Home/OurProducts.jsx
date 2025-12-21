@@ -1,18 +1,3 @@
-// import React from "react";
-// import Container from "../Shared/Container";
-
-// const OurProducts = () => {
-//   return (
-//     <Container>
-//       <div>
-//         <h1 className="text-2xl text-center my-10 font-bold">Our Products</h1>
-//       </div>
-//     </Container>
-//   );
-// };
-
-// export default OurProducts;
-
 import React, { useEffect, useState } from "react";
 import Container from "../Shared/Container";
 import { Link } from "react-router";

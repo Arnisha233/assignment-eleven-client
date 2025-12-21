@@ -40,7 +40,7 @@ const ProductCard = ({ product }) => {
         <p className="text-sm text-gray-500">Category: {category}</p>
 
         {/* Price */}
-        <div className="font-bold text-lg text-lime-600">${price}</div>
+        <div className="font-bold text-lg text-[#422AD5]">${price}</div>
         {/* Available Quantity */}
         <p className="text-sm text-gray-500">Available: {quantity}</p>
 
@@ -49,8 +49,7 @@ const ProductCard = ({ product }) => {
           className="
       mt-3 
       w-full 
-      bg-lime-500 
-      hover:bg-lime-600 
+      btn btn-primary
       text-white 
       py-2 
       rounded-lg 

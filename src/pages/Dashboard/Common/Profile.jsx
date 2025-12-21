@@ -114,7 +114,7 @@ const Profile = () => {
             />
           </a>
 
-          <p className="p-2 px-4 text-xs text-white bg-lime-500 rounded-full">
+          <p className="p-2 px-4 text-xs text-white bg-[#007aff] rounded-full">
             {isRoleLoading ? "Loading..." : role}
           </p>
 
@@ -148,7 +148,7 @@ const Profile = () => {
                 {/* ✅ Logout Button */}
                 <button
                   onClick={handleSignOut}
-                  className="bg-red-500 px-12 py-1 rounded-lg text-white hover:bg-red-700 block"
+                  className="bg-[#007aff] px-12 py-1 rounded-lg text-white  block"
                 >
                   Logout
                 </button>

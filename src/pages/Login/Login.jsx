@@ -84,10 +84,6 @@ const Login = () => {
               <h1 className="text-5xl font-extrabold drop-shadow-lg">
                 Welcome Back
               </h1>
-              <p className="mt-4 text-lg text-white/80 leading-relaxed">
-                Sign in to continue your journey. Manage your account, explore
-                new features, and more.
-              </p>
             </div>
 
             {/* Login card */}
@@ -160,7 +156,7 @@ const Login = () => {
                 <div>
                   <button
                     type="submit"
-                    className="bg-lime-500 w-full rounded-md py-3 text-white"
+                    className="btn btn-primary w-full rounded-md py-3 text-white"
                   >
                     Login in
                   </button>
@@ -204,7 +200,7 @@ const Login = () => {
                   Don’t have an account?{" "}
                   <Link
                     to="/signup"
-                    className="text-pink-300 hover:text-white underline"
+                    className="text-blue-600 hover:text-white underline"
                   >
                     Sign up
                   </Link>

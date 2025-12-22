@@ -1,3 +1,24 @@
+
+project name: Garments Order & Production
+live URL: 
+
+Key Features:
+Role-Based Dashboard
+Dynamic Production Tracking
+Order Lifecycle Management
+Responsive UI
+Secure Authentication
+Conditional Rendering
+
+NPM Packages:
+axios
+react-router-dom
+@tanstack/react-query
+framer-motion
+react-hot-toast
+react-icons
+
+
 # React + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.

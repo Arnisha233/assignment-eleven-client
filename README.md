@@ -1,6 +1,6 @@
 
 project name: Garments Order & Production
-live URL: 
+live URL: https://amazing-fox-331476.netlify.app/
 
 Key Features:
 Role-Based Dashboard

@@ -23,6 +23,9 @@ import AllOrders from "../pages/Dashboard/Admin/AllOrders";
 import AllOrderDetails from "../pages/Dashboard/Admin/AllOrderDetails";
 import ApproveOrders from "../pages/Dashboard/Manager/ApproveOrders";
 import TrackOrder from "../pages/Dashboard/Customer/TrackOrder";
+import Moments from "../pages/Moments";
+import Brand from "../pages/Brand";
+import Faq from "../pages/Faq";
 
 export const router = createBrowserRouter([
   {
@@ -37,6 +40,18 @@ export const router = createBrowserRouter([
       {
         path: "/all-product",
         element: <AllProduct />,
+      },
+      {
+        path: "/moments",
+        element: <Moments />,
+      },
+      {
+        path: "/brand",
+        element: <Brand />,
+      },
+      {
+        path: "/faq",
+        element: <Faq />,
       },
       {
         path: "/about-us",

@@ -1,9 +1,66 @@
+// import React, { useState } from "react";
+// import UpdateUserRoleModal from "../../Modal/UpdateUserRoleModal";
+
+// const UserDataRow = ({ user, refetch }) => {
+//   let [isOpen, setIsOpen] = useState(false);
+//   const closeModal = () => setIsOpen(false);
+//   return (
+//     <tr className="flex flex-col md:table-row mb-4 md:mb-0 border border-gray-200 md:border-none bg-white rounded-lg md:rounded-none shadow-sm md:shadow-none overflow-hidden">
+//       <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+//         <p className="text-gray-900 ">{user?.name}</p>
+//       </td>
+//       <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+//         <p className="text-gray-900 ">{user?.email}</p>
+//       </td>
+//       <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+//         <p className="text-gray-900 ">{user?.role}</p>
+//       </td>
+
+//       <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+//         <span
+//           onClick={() => setIsOpen(true)}
+//           className="relative cursor-pointer inline-block px-3 py-1 font-semibold text-green-900 leading-tight"
+//         >
+//           <span
+//             aria-hidden="true"
+//             className="absolute inset-0 bg-green-200 opacity-50 rounded-full"
+//           ></span>
+//           <span className="relative">Update Role</span>
+//         </span>
+//         {/* Modal */}
+//         <UpdateUserRoleModal
+//           user={user}
+//           refetch={refetch}
+//           isOpen={isOpen}
+//           closeModal={closeModal}
+//           role="customer"
+//         />
+//       </td>
+//     </tr>
+//   );
+// };
+
+// export default UserDataRow;
+
 import React, { useState } from "react";
 import UpdateUserRoleModal from "../../Modal/UpdateUserRoleModal";
+import toast from "react-hot-toast";
 
 const UserDataRow = ({ user, refetch }) => {
   let [isOpen, setIsOpen] = useState(false);
   const closeModal = () => setIsOpen(false);
+
+  // ১. মাস্টার অ্যাডমিন চেক লজিক
+  const isMasterAdmin = localStorage.getItem("isMasterAdmin") === "true";
+
+  // ২. ক্লিক হ্যান্ডলার
+  const handleUpdateClick = () => {
+    if (!isMasterAdmin) {
+      return toast.error("READ-ONLY MODE: You cannot update user roles.");
+    }
+    setIsOpen(true);
+  };
+
   return (
     <tr className="flex flex-col md:table-row mb-4 md:mb-0 border border-gray-200 md:border-none bg-white rounded-lg md:rounded-none shadow-sm md:shadow-none overflow-hidden">
       <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
@@ -17,16 +74,27 @@ const UserDataRow = ({ user, refetch }) => {
       </td>
 
       <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+        {/* ৩. ডাইনামিক স্টাইল এবং হ্যান্ডলার */}
         <span
-          onClick={() => setIsOpen(true)}
-          className="relative cursor-pointer inline-block px-3 py-1 font-semibold text-green-900 leading-tight"
+          onClick={handleUpdateClick}
+          title={!isMasterAdmin ? "Access Denied" : "Update user role"}
+          className={`relative inline-block px-3 py-1 font-semibold leading-tight transition-all ${
+            isMasterAdmin
+              ? "cursor-pointer text-green-900"
+              : "cursor-not-allowed text-gray-400"
+          }`}
         >
           <span
             aria-hidden="true"
-            className="absolute inset-0 bg-green-200 opacity-50 rounded-full"
+            className={`absolute inset-0 rounded-full ${
+              isMasterAdmin
+                ? "bg-green-200 opacity-50"
+                : "bg-gray-200 opacity-50"
+            }`}
           ></span>
           <span className="relative">Update Role</span>
         </span>
+
         {/* Modal */}
         <UpdateUserRoleModal
           user={user}
